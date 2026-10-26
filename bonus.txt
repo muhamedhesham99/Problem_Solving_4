@@ -1,0 +1,18 @@
+# Write your MySQL query statement below
+-- CREATE TABLE visits (
+--     visit_id int primary key,
+--     customer_id  int not null
+-- );
+
+-- CREATE TABLE transactions (
+--     transactions_id int primary key,
+--     visit_id int not null,
+--     amount int not null,
+--     constraint fk_transactions_visitor foreign key (visit_id) references visits(visit_id)
+-- );
+
+-- Insert into Visits (visit_id, customer_id) values (1,23), (2,9), (4,30), (5,54), (6,96), (7,54), (8,54);
+-- Insert into Transactions (transaction_id ,visit_id ,amount ) values (2,5,310), (3,5,300), (9,5,200), (12,1,910), (13,2,970);
+
+SELECT v.customer_id, COUNT(*) AS count_no_trans FROM Visits AS v LEFT JOIN Transactions AS t
+ON v.visit_id = t.visit_id WHERE t.transaction_id IS NULL GROUP BY v.customer_id;
